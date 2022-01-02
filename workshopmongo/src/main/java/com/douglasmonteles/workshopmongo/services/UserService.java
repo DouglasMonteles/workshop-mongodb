@@ -24,11 +24,11 @@ public class UserService {
 				.collect(Collectors.toList());
 	}
 	
-	public UserDTO findById(String id) {
+	public User findById(String id) {
 		User user = userRepository.findById(id)
 				.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id));
 		
-		return new UserDTO(user);
+		return user;
 	}
 	
 	public User insert(User user) {
@@ -36,7 +36,7 @@ public class UserService {
 	}
 	
 	public User update(User user) {
-		var newUser = fromUserDTO(findById(user.getId()));
+		var newUser = findById(user.getId());
 		updateData(newUser, user);
 		
 		return userRepository.save(newUser);
