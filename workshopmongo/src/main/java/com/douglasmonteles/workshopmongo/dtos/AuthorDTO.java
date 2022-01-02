@@ -4,20 +4,23 @@ import java.io.Serializable;
 
 import com.douglasmonteles.workshopmongo.domain.User;
 
-public class UserDTO implements Serializable {
+public class AuthorDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
 	private String id;
 	private String name;
-	private String email;
 	
-	public UserDTO() {}
+	public AuthorDTO() {}
+
+	public AuthorDTO(String id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 	
-	public UserDTO(User user) {
+	public AuthorDTO(User user) {
 		this.id = user.getId();
 		this.name = user.getName();
-		this.email = user.getEmail();
 	}
 
 	public String getId() {
@@ -34,14 +37,6 @@ public class UserDTO implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	
 }
