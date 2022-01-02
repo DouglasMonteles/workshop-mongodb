@@ -35,6 +35,13 @@ public class UserService {
 		return userRepository.insert(user);
 	}
 	
+	public User update(User user) {
+		var newUser = fromUserDTO(findById(user.getId()));
+		updateData(newUser, user);
+		
+		return userRepository.save(newUser);
+	}
+	
 	public void delete(String id) {
 		this.findById(id);
 		userRepository.deleteById(id);
@@ -42,6 +49,11 @@ public class UserService {
 	
 	public User fromUserDTO(UserDTO userDTO) {
 		return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
+	}
+	
+	private void updateData(User newUser, User user) {
+		newUser.setName(user.getName());
+		newUser.setEmail(user.getEmail());
 	}
 	
 }
